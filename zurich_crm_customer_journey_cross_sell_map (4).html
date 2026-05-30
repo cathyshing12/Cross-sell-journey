@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zurich HK CRM Journey Map</title>
+  <style>
+    :root{
+      --zurich-blue:#003399;--gi:#00a6a6;--life:#1d3557;--gold:#f5b700;--purple:#6f42c1;--red:#d85c5c;--ink:#172033;--muted:#667085;--line:#d9e2ef;--bg:#f6f8fb;--white:#fff;--green:#22c55e;--pending:#ef4444;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+    .page{max-width:1700px;margin:0 auto;padding:28px}
+    .hero{background:linear-gradient(135deg,#fff 0%,#eaf1ff 100%);border:1px solid var(--line);border-radius:26px;padding:30px 34px;box-shadow:0 14px 35px rgba(0,32,91,.08);margin-bottom:22px}
+    .eyebrow{color:var(--zurich-blue);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px;margin-bottom:10px}
+    h1{margin:0;font-size:34px;line-height:1.15;color:#10233f}.subtitle{margin-top:12px;color:var(--muted);font-size:16px;line-height:1.5;max-width:1150px}
+    .legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;background:#fff;border:1px solid var(--line);border-radius:999px;color:#334155;font-size:13px;box-shadow:0 4px 12px rgba(15,23,42,.04)}.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+    .section-title{margin:24px 0 14px;display:flex;align-items:end;justify-content:space-between;gap:18px}.section-title h2{font-size:23px;margin:0;color:#10233f}.note{color:var(--muted);font-size:13px;line-height:1.45}
+    .top-actions{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin:18px 0 22px}
+    .filter-bar{display:flex;gap:10px;align-items:center}
+    .nav-actions{display:flex;gap:10px;align-items:center}
+    .filter-btn{border:1px solid var(--line);background:#fff;padding:10px 16px;border-radius:999px;font-size:13px;font-weight:800;color:#334155;cursor:pointer;transition:.2s ease;box-shadow:0 4px 12px rgba(15,23,42,.04)}
+    .filter-btn:hover{border-color:var(--zurich-blue);color:var(--zurich-blue)}
+    .filter-btn.active{background:var(--zurich-blue);border-color:var(--zurich-blue);color:#fff}
+    .nav-btn{border:1px solid var(--zurich-blue);background:#fff;padding:10px 16px;border-radius:999px;font-size:13px;font-weight:800;color:var(--zurich-blue);cursor:pointer;transition:.2s ease}
+    .nav-btn:hover{background:var(--zurich-blue);color:#fff}
+
+    .journey-scroll{overflow-x:auto;padding-bottom:10px}
+    .stage-grid{display:grid;grid-template-columns:repeat(5,minmax(360px,360px));gap:16px;align-items:start;min-width:max-content}
+    .stage-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 16px 36px rgba(15,23,42,.07);overflow:visible;min-height:100%}
+    .stage-card:not(:last-child)::after{content:'→';position:absolute;top:18px;right:-14px;width:28px;height:28px;border-radius:50%;background:var(--zurich-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;box-shadow:0 6px 14px rgba(0,51,153,.25);z-index:5}
+    .stage-head{background:#10233f;color:#fff;padding:16px 18px;text-align:center;font-weight:900;font-size:16px}.stage-head small{display:block;font-weight:500;opacity:.82;margin-top:5px;font-size:11px}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px;background:#fbfdff}
+    .journey-col{background:#fff;border:1px solid #edf1f7;border-radius:18px;padding:10px;min-height:150px}
+    .col-title{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;margin-bottom:9px;padding:7px;border-radius:999px;color:#fff}.col-title.gi{background:var(--gi)}.col-title.life{background:var(--life)}
+    .shared-zone{padding:0 12px 12px;background:#fbfdff}.shared-title{font-size:11px;font-weight:900;color:var(--purple);text-transform:uppercase;letter-spacing:.05em;margin:2px 0 8px;text-align:center}
+
+    .simple-card{position:relative;width:100%;min-height:78px;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:12px 38px 12px 13px;margin-bottom:10px;box-shadow:0 6px 14px rgba(15,23,42,.04);cursor:pointer;transition:.2s ease;font-family:inherit}
+    div.simple-card{cursor:default}.simple-card:hover{border-color:var(--zurich-blue);box-shadow:0 10px 22px rgba(0,51,153,.12);transform:translateY(-1px)}div.simple-card:hover{border-color:#e5e7eb;box-shadow:0 6px 14px rgba(15,23,42,.04);transform:none}
+    .simple-card h3{margin:0 0 5px;font-size:13.5px;color:#111827;line-height:1.25;padding-right:18px}.simple-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.35}
+    .star{position:absolute;top:28px;right:12px;color:var(--gold);font-size:17px}.open{position:absolute;bottom:10px;right:12px;color:var(--zurich-blue);font-weight:900;font-size:13px}
+    .status-dot{position:absolute;top:13px;right:13px;width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(15,23,42,.12)}.status-live{background:var(--green)}.status-pending{background:var(--pending)}
+    .life-lead{border-left:5px solid var(--gold);background:#fffaf0}.shared{border-left:5px solid var(--purple);background:#fbf7ff}
+
+    .lead-engine{margin-top:24px;display:grid;grid-template-columns:1fr 1.1fr;gap:18px}.panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 12px 28px rgba(15,23,42,.06)}.panel h2,.panel h3{margin:0 0 10px;color:#10233f}.panel p{margin:0;color:var(--muted);line-height:1.5;font-size:14px}
+    .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px}.flow-step{position:relative;background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:18px 14px;text-align:center;min-height:128px;display:flex;flex-direction:column;align-items:center;justify-content:center}.flow-step:not(:last-child)::after{content:'→';position:absolute;right:-13px;top:50%;transform:translateY(-50%);color:var(--zurich-blue);font-weight:900;z-index:2}.flow-icon{font-size:28px;line-height:1;margin-bottom:10px;display:block}.flow-step b{display:block;color:var(--zurich-blue);margin-bottom:6px;font-size:14px}
+    .touchpoint-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}.mini{border:1px solid #e5e7eb;border-radius:14px;padding:11px;background:#fffaf0;font-size:12.5px;font-weight:700;color:#374151}
+    .message-box{margin-top:20px;background:#10233f;color:#fff;border-radius:24px;padding:22px 24px;display:grid;grid-template-columns:1.3fr .7fr;gap:20px}.message-box h3{margin:0 0 8px}.message-box p{margin:0;color:#dbeafe;line-height:1.5;font-size:14px}
+
+    .modal{display:none;position:fixed;inset:0;z-index:20;background:rgba(15,23,42,.58);align-items:center;justify-content:center;padding:24px}.modal.show{display:flex}.modal-card{width:min(760px,96vw);background:#fff;border-radius:26px;box-shadow:0 30px 80px rgba(0,0,0,.25);overflow:hidden}
+    .universe-modal{padding:18px}
+    .universe-modal-card{width:98vw;max-width:1500px;max-height:92vh;overflow:auto}
+    .universe-modal-card .modal-body{overflow-x:auto;padding:24px 28px}.modal-head{padding:20px 24px;background:linear-gradient(135deg,#003399,#1d4ed8);color:white;display:flex;justify-content:space-between;gap:16px;align-items:start}.modal-head h2{margin:0;font-size:22px}.modal-head p{margin:6px 0 0;color:#dbeafe;font-size:13px;line-height:1.4}.close{border:0;background:rgba(255,255,255,.18);color:#fff;border-radius:999px;width:34px;height:34px;font-size:20px;cursor:pointer}.modal-body{padding:22px 24px}.detail-flow{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:16px;position:relative}.step{background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:13px 14px 13px 46px;font-size:13px;font-weight:800;color:#263244;position:relative;box-shadow:0 5px 12px rgba(15,23,42,.04)}.step::before{content:attr(data-step);position:absolute;left:13px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--zurich-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900}.step:not(:last-child)::after{content:'↓';position:absolute;left:22px;bottom:-18px;color:var(--zurich-blue);font-weight:900;z-index:2}.modal-section{background:#f9fafb;border:1px solid #e5e7eb;border-radius:18px;padding:14px;margin-top:12px}
+    .decision-tree{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:16px}
+    .decision-arrow{font-size:22px;font-weight:900;color:var(--zurich-blue);line-height:1}
+    .branch-arrow{font-size:18px;font-weight:900;color:var(--zurich-blue);line-height:1}
+    .decision-node{background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:14px 18px;font-size:13px;font-weight:800;color:#263244;min-width:260px;text-align:center;position:relative;box-shadow:0 5px 12px rgba(15,23,42,.04)}
+    .decision-branches{display:flex;gap:18px;justify-content:center;align-items:flex-start;width:100%}
+    .branch{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1}
+    .branch-label{font-size:12px;font-weight:900;color:var(--zurich-blue);text-transform:uppercase;letter-spacing:.04em}.modal-section b{display:block;color:#10233f;margin-bottom:6px}.modal-section span{color:var(--muted);font-size:13px;line-height:1.45}
+    .universe-table{width:100%;min-width:980px;border-collapse:collapse;font-size:13px;margin-top:8px;table-layout:fixed}
+    .universe-table col:first-child{width:230px}
+    .universe-table col:not(:first-child){width:120px}
+    .universe-table th,.universe-table td{border:1px solid #e5e7eb;padding:12px 10px;text-align:center;height:58px;vertical-align:middle;white-space:nowrap}
+    .universe-table th{background:#10233f;color:#fff;font-weight:800}
+    .universe-table td:first-child{font-weight:800;text-align:left;background:#f8fafc}
+    .status-circle{display:inline-block;width:12px;height:12px;border-radius:50%}
+    .roadmap-phase{border:1px solid #e5e7eb;border-radius:18px;padding:16px;margin-bottom:12px;background:#f9fafb}
+    .roadmap-phase h3{margin:0 0 8px;color:#10233f}
+    .roadmap-phase p{margin:0;color:var(--muted);line-height:1.5;font-size:14px}
+    @media(max-width:1400px){.stage-grid{grid-template-columns:repeat(5,minmax(360px,360px))}.lead-engine,.message-box,.flow{grid-template-columns:1fr}.flow-step:not(:last-child)::after{display:none}}@media(max-width:850px){.stage-grid,.two-col,.touchpoint-list{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">Zurich Hong Kong · CRM Ecosystem</div>
+      <h1>GI × Life CRM Customer Journey Map</h1>
+      <div class="subtitle">A stage-by-stage view showing GI and Life touchpoints side by side. Shared touchpoints are combined to highlight the mutual GI ↔ Life cross-sell ecosystem.</div>
+      <div class="legend">
+        <span class="pill"><span class="dot" style="background:var(--gi)"></span> GI Touchpoints</span>
+        <span class="pill"><span class="dot" style="background:var(--life)"></span> Life Touchpoints</span>
+        <span class="pill"><span style="color:var(--gold);font-size:18px">★</span> Cross-sell Opportunity</span>
+        <span class="pill"><span class="dot" style="background:var(--gold)"></span> GI ↔ Life Lead Moment</span>
+        <span class="pill"><span class="dot" style="background:var(--purple)"></span> Shared Touchpoint</span>
+        <span class="pill"><span class="dot" style="background:#22c55e"></span> Launched</span>
+        <span class="pill"><span class="dot" style="background:#ef4444"></span> Not launched yet</span>
+      </div>
+    </section>
+
+    <div class="top-actions">
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterJourney('all', this)">Show All</button>
+      <button class="filter-btn" onclick="filterJourney('gi', this)">GI Only</button>
+      <button class="filter-btn" onclick="filterJourney('life', this)">Life Only</button>
+    </div>
+
+    <div class="nav-actions">
+      <button class="nav-btn" onclick="openUniverseModal()">Reachable Universe</button>
+      
+    </div>
+    </div>
+
+    <section class="section-title">
+      <div>
+        <h2>Layer 1: Lifecycle Stages with GI & Life Side by Side</h2>
+        <div class="note">Click selected cards to open Layer 2 details. Shared retention and lapse touchpoints are combined across GI and Life.</div>
+      </div>
+    </section>
+
+    <div class="journey-scroll">
+    <section class="stage-grid">
+      <div class="stage-card">
+        <div class="stage-head">1. Pre-purchase<small>Acquire / generate intent</small></div>
+        <div class="two-col">
+          <div class="journey-col gi-column"><div class="col-title gi">GI</div>
+            <button class="simple-card" onclick="openModal('paidAd')"><span class="status-dot status-live"></span><h3>Paid Ad</h3><p>Direct to purchase site.</p><span class="open">+</span></button>
+            <button class="simple-card life-lead" onclick="openModal('organic')"><span class="status-dot status-live"></span><span class="star">★</span><h3>Organic</h3><p>SEO / content with offer placement.</p><span class="open">+</span></button>
+            <button class="simple-card life-lead" onclick="openModal('leadGen')"><span class="status-dot status-live"></span><span class="star">★</span><h3>Lead Gen</h3><p>Free product captures lead.</p><span class="open">+</span></button>
+          </div>
+          <div class="journey-col life-column"><div class="col-title life">Life</div>
+            <button class="simple-card" onclick="openModal('lifePaidAd')"><span class="status-dot status-live"></span><h3>Paid Ad</h3><p>Digital conversion or TM-assisted follow-up.</p><span class="open">+</span></button>
+            <button class="simple-card life-lead" onclick="openModal('lifeOrganic')"><span class="status-dot status-live"></span><span class="star">★</span><h3>Organic</h3><p>Organic journey with TM follow-up.</p><span class="open">+</span></button>
+            <button class="simple-card life-lead" onclick="openModal('lifeLeadGen')"><span class="status-dot status-live"></span><span class="star">★</span><h3>Lead Gen</h3><p>Lead Gen Campaign + GI Travel Base for TM outreach.</p><span class="open">+</span></button>
+            <button class="simple-card life-lead" onclick="openModal('freeToPaid')"><span class="status-dot status-live"></span><span class="star">★</span><h3>Free to Paid Upsell</h3><p>Upsell from free product to paid conversion.</p><span class="open">+</span></button>
+            <div class="simple-card"><span class="status-dot status-live"></span><h3>Inbound / CS Transfer Calls</h3><p>Customer enquiries routed to Life conversion.</p></div>
+            <button class="simple-card life-lead" onclick="openModal('orphanLife')"><span class="status-dot status-live"></span><span class="star">★</span><h3>Orphan Life Customers (ZLIC + ZAL)</h3><p>TM call and corp agent referral opportunity.</p><span class="open">+</span></button>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="stage-card">
+        <div class="stage-head">2. During Purchase<small>Convert / upsell</small></div>
+        <div class="two-col">
+          <div class="journey-col gi-column"><div class="col-title gi">GI</div>
+            <div class="simple-card"><span class="status-dot status-live"></span><span class="star">★</span><h3>Upsell Plan / Rider</h3><p>Increase cover or attach rider.</p></div>
+            <button class="simple-card life-lead" onclick="openModal('afterPurchaseBanner')"><span class="status-dot status-live"></span><span class="star">★</span><h3>After Purchase Page Banner</h3><p>Promote GI / Life product.</p><span class="open">+</span></button>
+            <div class="simple-card life-lead"><span class="status-dot status-live"></span><span class="star">★</span><h3>Fulfilment Email</h3><p>Policy email cross-sell slot.</p></div>
+          </div>
+          <div class="journey-col life-column"><div class="col-title life">Life</div>
+            <button class="simple-card life-lead" onclick="openModal('lifeTmCall')"><span class="status-dot status-live"></span><span class="star">★</span><h3>TM Call</h3><p>TM call with corp agent referral opportunity.</p><span class="open">+</span></button>
+            <button class="simple-card life-lead" onclick="openModal('lifeAfterPurchaseBanner')"><span class="status-dot status-live"></span><span class="star">★</span><h3>After Purchase Page Banner</h3><p>Direct conversion or TM-assisted follow-up.</p><span class="open">+</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-card">
+        <div class="stage-head">3. After Purchase<small>Engage / deepen</small></div>
+        <div class="two-col">
+          <div class="journey-col gi-column"><div class="col-title gi">GI</div>
+            <button class="simple-card life-lead" onclick="openModal('welcomeBack')"><span class="status-dot status-live"></span><span class="star">★</span><h3>Welcome Back eDM</h3><p>Re-engage active customers.</p><span class="open">+</span></button>
+            <div class="simple-card life-lead"><span class="status-dot status-live"></span><span class="star">★</span><h3>After TNPS eDM</h3><p>Use positive sentiment.</p></div>
+            <div class="simple-card life-lead"><span class="status-dot status-live"></span><span class="star">★</span><h3>After Claim eDM</h3><p>Post-claim need creation.</p></div>
+            <button class="simple-card" onclick="openModal('ozcp')"><span class="status-dot status-live"></span><span class="star">★</span><h3>OZCP Marketing Banner</h3><p>Portal next best offer.</p><span class="open">+</span></button>
+          </div>
+          <div class="journey-col life-column"><div class="col-title life">Life</div>
+            <div class="simple-card life-lead"><span class="status-dot status-pending"></span><span class="star">★</span><h3>Welcome Onboard eDM</h3><p>Introduce GI opportunities.</p></div>
+            <div class="simple-card life-lead"><span class="status-dot status-live"></span><span class="star">★</span><h3>Nurturing eDM</h3><p>Ongoing customer engagement and education.</p></div>
+            <button class="simple-card life-lead" onclick="openModal('lifeTmCallAfter')"><span class="status-dot status-live"></span><span class="star">★</span><h3>TM Call</h3><p>Cross-sell / corp agent referral opportunity.</p><span class="open">+</span></button>
+            <button class="simple-card" onclick="openModal('lifeOzcpBanner')"><span class="status-dot status-live"></span><span class="star">★</span><h3>OZCP Marketing Banner</h3><p>Direct conversion or TM-assisted follow-up.</p><span class="open">+</span></button>
+          </div>
+        </div>
+        <div class="shared-zone">
+          <div class="shared-title">Shared always-on lifecycle campaigns</div>
+          <div class="simple-card life-lead"><span class="status-dot status-live"></span><span class="star">★</span><h3>Birthday eDM</h3><p>GI and Life lifecycle engagement.</p></div>
+          <div class="simple-card life-lead"><span class="status-dot status-live"></span><span class="star">★</span><h3>Seasonal eDM</h3><p>Campaign-based GI / Life promotion.</p></div>
+        </div>
+      </div>
+
+      <div class="stage-card">
+        <div class="stage-head">4. Retention<small>Renew / expand value</small></div>
+        <div class="two-col">
+          <div class="journey-col gi-column"><div class="col-title gi">GI</div>
+            <div class="simple-card"><span class="status-dot status-pending"></span><h3>Retention Discount</h3><p>Save customer at renewal risk.</p></div>
+            <div class="simple-card life-lead"><span class="status-dot status-pending"></span><span class="star">★</span><h3>After Renew Thank-you eDM</h3><p>Cross-sell GI or Life after renewal.</p></div>
+          </div>
+          <div class="journey-col life-column"><div class="col-title life">Life</div>
+            <button class="simple-card life-lead" onclick="openModal('lifePolicyLetter')"><span class="status-dot status-live"></span><span class="star">★</span><h3>Customer Policy Update Letter</h3><p>Monthly ZAL + ZLIC update with direct product offers.</p><span class="open">+</span></button>
+          </div>
+        </div>
+        <div class="shared-zone">
+          <div class="shared-title">Shared GI × Life retention programs</div>
+          <div class="simple-card shared"><span class="status-dot status-pending"></span><h3>Multi-policy Discount</h3><p>Encourage second policy purchase.</p></div>
+          <div class="simple-card shared"><span class="status-dot status-pending"></span><span class="star">★</span><h3>Multi-policy Program eDM</h3><p>Introduce / remind program benefits.</p></div>
+          <div class="simple-card shared"><span class="status-dot status-pending"></span><span class="star">★</span><h3>OZCP Multi-policy Cross-sell</h3><p>Portal-based GI ↔ Life recommendation.</p></div>
+        </div>
+      </div>
+
+      <div class="stage-card">
+        <div class="stage-head">5. Lapse / Mature<small>Winback / reactivate</small></div>
+        <div class="two-col" style="padding-top:12px;background:#fbfdff">
+          <div class="journey-col gi-column"><div class="col-title gi">GI</div>
+            <div class="simple-card"><span class="status-dot status-pending"></span><h3>Winback eDM</h3><p>Reconnect 30–90 days after lapse.</p></div>
+          </div>
+
+          <div class="journey-col life-column"><div class="col-title life">Life</div>
+            <button class="simple-card life-lead" onclick="openModal('maturityEdm')"><span class="status-dot status-pending"></span><span class="star">★</span><h3>Maturity-triggered eDM</h3><p>ZAL + ZLIC maturity communication.</p><span class="open">+</span></button>
+            <button class="simple-card life-lead" onclick="openModal('csTransfer')"><span class="status-dot status-live"></span><span class="star">★</span><h3>CS Maturity Enquiry Call Transfer</h3><p>CS transfers maturity lead to TM.</p><span class="open">+</span></button>
+            <div class="simple-card life-lead"><span class="status-dot status-live"></span><span class="star">★</span><h3>Customer Maturity Letter</h3><p>ZAL + ZLIC maturity communication.</p></div>
+          </div>
+        </div>
+
+        <div class="shared-zone">
+          <div class="shared-title">Shared GI × Life reactivation campaigns</div>
+          <div class="simple-card life-lead"><span class="status-dot status-pending"></span><span class="star">★</span><h3>Winback eDM</h3><p>Reconnect customers after lapse.</p></div>
+          <div class="simple-card life-lead"><span class="status-dot status-pending"></span><span class="star">★</span><h3>Lifestage & Seasonal eDM</h3><p>Birthday eDM and seasonal offer eDM.</p></div>
+        </div>
+      </div>
+    </section>
+    </div>
+
+    <section class="lead-engine">
+      <div class="panel">
+        <h2>GI ↔ Life Cross-sell Conversion Engine</h2>
+        <p>The strategic layer: GI and Life journeys support each other. Customer interactions in either journey can become signals for the next best GI or Life offer.</p>
+        <div class="flow">
+          <div class="flow-step"><span class="flow-icon">📧</span><b>CRM Touchpoint</b><span class="note">eDM, banner, thank-you page, OZCP</span></div>
+          <div class="flow-step"><span class="flow-icon">🔁</span><b>GI / Life Offer</b><span class="note">Relevant next product message</span></div>
+          <div class="flow-step"><span class="flow-icon">👆</span><b>Customer Click</b><span class="note">Interest signal captured</span></div>
+          <div class="flow-step"><span class="flow-icon">🎯</span><b>Lead Created</b><span class="note">Customer + source context</span></div>
+          <div class="flow-step"><span class="flow-icon">📞</span><b>Follow-up</b><span class="note">TM call or digital journey</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Priority Shared Cross-sell Moments</h2>
+        <p>Best touchpoints because customers are active, identifiable and reachable.</p>
+        <div class="touchpoint-list">
+          <div class="mini">★ After purchase page banner</div><div class="mini">★ Fulfilment email</div><div class="mini">★ Welcome back eDM</div><div class="mini">★ After TNPS eDM</div><div class="mini">★ After claim eDM</div><div class="mini">★ OZCP pop-up / banner</div><div class="mini">★ Birthday eDM</div><div class="mini">★ Seasonal eDM</div>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:30px">
+      <div style="display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:16px">
+        <div>
+          <h2 style="margin:0;font-size:28px;color:#10233f">So what's next?</h2>
+          <div class="note">4-phase rollout roadmap to scale GI × Life CRM cross-sell ecosystem.</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(280px,1fr));gap:18px;overflow-x:auto;padding-bottom:8px">
+
+        <div style="background:linear-gradient(135deg,#eff6ff,#ffffff);border:1px solid #bfdbfe;border-radius:24px;padding:22px;box-shadow:0 12px 28px rgba(59,130,246,.10)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <span style="background:#2563eb;color:#fff;font-size:12px;font-weight:800;padding:6px 10px;border-radius:999px">Phase 1</span>
+            <span style="font-size:13px;font-weight:700;color:#2563eb">Jun – Jul</span>
+          </div>
+          <h3 style="margin:0 0 10px;color:#10233f">Increase GI ↔ Life Lead Moment</h3>
+          <p style="margin:0;color:#475569;line-height:1.6;font-size:14px">Include GI cross-sell messaging in all GI ↔ Life lead moments to quickly expand reachable cross-sell inventory.</p>
+          <div style="margin-top:16px;padding-top:14px;border-top:1px dashed #cbd5e1;color:#1e40af;font-size:13px;font-weight:700">Focus: Quick-win expansion</div>
+        </div>
+
+        <div style="background:linear-gradient(135deg,#f5f3ff,#ffffff);border:1px solid #ddd6fe;border-radius:24px;padding:22px;box-shadow:0 12px 28px rgba(124,58,237,.10)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <span style="background:#7c3aed;color:#fff;font-size:12px;font-weight:800;padding:6px 10px;border-radius:999px">Phase 2</span>
+            <span style="font-size:13px;font-weight:700;color:#7c3aed">Aug – Sep</span>
+          </div>
+          <h3 style="margin:0 0 10px;color:#10233f">Complete Retention & Lapse Stage Cross-sell</h3>
+          <p style="margin:0;color:#475569;line-height:1.6;font-size:14px">Complete retention and lapse-stage cross-sell initiatives to cover the full customer lifecycle journey.</p>
+          <div style="margin-top:16px;padding-top:14px;border-top:1px dashed #cbd5e1;color:#6d28d9;font-size:13px;font-weight:700">Focus: Full-funnel coverage</div>
+        </div>
+
+        <div style="background:linear-gradient(135deg,#ecfeff,#ffffff);border:1px solid #a5f3fc;border-radius:24px;padding:22px;box-shadow:0 12px 28px rgba(8,145,178,.10)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <span style="background:#0891b2;color:#fff;font-size:12px;font-weight:800;padding:6px 10px;border-radius:999px">Phase 3</span>
+            <span style="font-size:13px;font-weight:700;color:#0891b2">Oct – Dec 2026</span>
+          </div>
+          <h3 style="margin:0 0 10px;color:#10233f">“Just-in-time” Situational Selling</h3>
+          <p style="margin:0;color:#475569;line-height:1.6;font-size:14px">Explore more personalized “Just in Time” CRM journeys based on customer events, intent and behaviour signals.</p>
+          <div style="margin-top:16px;padding-top:14px;border-top:1px dashed #cbd5e1;color:#0e7490;font-size:13px;font-weight:700">Focus: Personalization</div>
+        </div>
+
+        <div style="background:linear-gradient(135deg,#f0fdf4,#ffffff);border:1px solid #bbf7d0;border-radius:24px;padding:22px;box-shadow:0 12px 28px rgba(34,197,94,.10)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <span style="background:#16a34a;color:#fff;font-size:12px;font-weight:800;padding:6px 10px;border-radius:999px">Phase 4</span>
+            <span style="font-size:13px;font-weight:700;color:#16a34a">2027+</span>
+          </div>
+          <h3 style="margin:0 0 10px;color:#10233f">AI-driven Next Best Offer</h3>
+          <p style="margin:0;color:#475569;line-height:1.6;font-size:14px">Move towards predictive and AI-driven recommendation engines across GI, Life and multi-policy ecosystems.</p>
+          <div style="margin-top:16px;padding-top:14px;border-top:1px dashed #cbd5e1;color:#15803d;font-size:13px;font-weight:700">Focus: Intelligent CRM ecosystem</div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal" onclick="closeModal(event)"><div class="modal-card" onclick="event.stopPropagation()"><div class="modal-head"><div><h2 id="modalTitle"></h2><p id="modalDesc"></p></div><button class="close" onclick="hideModal()">×</button></div><div class="modal-body"><div id="modalFlow" class="detail-flow"></div><div class="modal-section"><b>Cross-sell / lead logic</b><span id="modalLogic"></span></div></div></div></div>
+
+  <script>
+    const details={
+      paidAd:{title:'GI Paid Ad',desc:'Paid media drives high-intent traffic into the GI purchase journey.',steps:['Paid ad','Purchase site','Drop-off reminder'],logic:'If customer drops off, trigger reminder eDM or retargeting. Life offer can be tested after GI purchase intent is captured.'},
+      organic:{title:'GI Organic',desc:'SEO articles and product pages create education-led purchase intent.',steps:['Organic','Product page / SEO article','Pop-up offer / sticky banner','Purchase site','Drop-off reminder'],logic:'Use pop-up or sticky banner to guide customer to GI purchase. Include Life teaser for protection-related content.'},
+      leadGen:{title:'GI Lead Gen',desc:'Free product campaign captures customer data and creates a nurturing path.',steps:['Lead gen campaign','Free product registration','Lead','Nurturing eDM','Purchase site','Drop-off reminder'],logic:'Use nurturing eDM to cross-sell GI and introduce Life protection. Clicks on Life message become TM leads.'},
+      afterPurchaseBanner:{title:'After Purchase Page Banner',desc:'Use the thank-you page as an immediate next-best-offer moment.',steps:['Purchase complete','Cross-sell Banner (Life offer) shown','Customer clicks','Route 1: Purchase','Route 2: Click but no purchase','Drop-off lead','TM follow-up call'],logic:'Life offer clicks become valuable intent signals. Customers who click but do not purchase can be captured as warm leads for TM follow-up conversion.'},
+      welcomeBack:{title:'Welcome Back eDM',desc:'Re-engage customers after product usage or service moment.',steps:['Customer returns / journey completed','Welcome back eDM','GI / Life offer','Customer clicks','Follow-up eDM or TM lead'],logic:'Good moment to move from transaction to relationship. Life angle can focus on family or income protection.'},
+      ozcp:{title:'OZCP Pop-up / Banner',desc:'Portal login provides a personalised next-best-offer placement.',steps:['OZCP login','Pop-up / banner','Customer clicks','Product page','Click but no purchase','Follow-up eDM'],logic:'Use customer profile and policy holding to decide whether to show GI, Life or multi-policy offer.'},
+      lifePaidAd:{title:'Life Paid Ad',desc:'Life paid campaigns can convert digitally or move customers into TM-assisted conversion.',steps:['Paid ad','Product page','Direct digital conversion OR drop-off','Drop-off reminder / retargeting','TM follow-up calls','Conversion'],logic:'Customers who show interest but do not complete digitally are valuable warm leads for TM conversion support.'},
+      lifeOrganic:{title:'Life Organic Journey',desc:'Content-led Life discovery journey with both digital conversion and TM-assisted follow-up.',steps:['Organic content / SEO','Product page','Direct digital conversion OR no purchase','Drop-off captured','TM follow-up','Consultation / conversion'],logic:'Some customers may convert digitally immediately, while drop-off customers become valuable warm leads for TM follow-up and consultation.'},
+      lifeLeadGen:{title:'Life Lead Gen',desc:'Lead generation campaigns and GI Travel Base create warm prospects for TM outreach.',steps:['Lead Gen Campaign + GI Travel Base','Warm lead captured','TM outreach','Consultation','Qualification','Conversion'],logic:'TM outreach helps qualify customer needs and improve conversion for more complex Life products.'},
+      orphanLife:{title:'Orphan Life Customers (ZLIC + ZAL)',desc:'Existing orphan Life customers can become valuable saving and investment opportunities.',steps:['Orphan Life Customers (ZLIC + ZAL)','TM call','Cross-sell / referral to corp agents','Saving / investment consultation','Conversion'],logic:'Orphan Life customers already have an existing relationship with Zurich and can be reactivated through TM and corp agent engagement.'},
+      lifeTmCallAfter:{title:'Life TM Call',desc:'TM engagement after purchase can create additional saving and investment opportunities.',steps:['TM call','Cross-sell / referral to corp agents','Saving / investment consultation','Conversion'],logic:'Post-purchase TM engagement can deepen customer relationship and expand product holding through corp agent referral.'},
+      freeToPaid:{title:'Free to Paid Upsell',desc:'Upsell free-product users into paid Life products through nurturing.',steps:['Free product registration','eDM nurturing','Upsell to paid product','TM follow-up','Conversion'],logic:'Customers already engaged with free products are lower-friction prospects for paid Life conversion.'},
+      lifeTmCall:{title:'Life TM Call',desc:'TM interaction can identify broader customer protection and investment needs.',steps:['TM call','Needs discovery','Referral to corp agent','Saving / investment consultation','Conversion'],logic:'TM conversations can generate referrals into higher-value saving and investment solutions handled by corp agents.'},
+      lifeAfterPurchaseBanner:{title:'Life After Purchase Page Banner',desc:'Thank-you page banner drives additional Life direct product opportunities.',steps:['Purchase completed','Banner displayed','Direct conversion OR drop-off','Drop-off reminder / retargeting','TM follow-up call','Conversion'],logic:'Customers who do not convert immediately can be retargeted and followed up by TM for assisted conversion.'},
+      lifeOzcpBanner:{title:'Life OZCP Marketing Banner',desc:'Portal-based Life marketing placements support direct and TM-assisted conversion.',steps:['OZCP login','Marketing banner shown','Direct conversion OR drop-off','Drop-off reminder / retargeting','TM follow-up call','Conversion'],logic:'OZCP creates persistent remarketing opportunities using customer profile and policy data.'},
+      lifePolicyLetter:{title:'Customer Policy Update Letter',desc:'Monthly ZAL + ZLIC policy updates become Life direct sales opportunities.',steps:['Monthly policy update letter','Introduction to Life direct products','Direct conversion OR drop-off','Drop-off reminder / retargeting','TM follow-up call','Conversion'],logic:'Monthly customer communication can become a scalable direct sales and lead generation touchpoint.'},
+      maturityEdm:{title:'Maturity-triggered eDM',desc:'Lifecycle maturity communications create re-engagement opportunities.',steps:['Policy maturity reached','Maturity-triggered eDM','Direct product promotion','Customer click','TM follow-up call','Conversion'],logic:'Maturity moments create strong intent signals for new Life product conversations.'},
+      csTransfer:{title:'CS Maturity Enquiry Call Transfer',desc:'Customer service maturity enquiries become sales opportunities.',steps:['Customer contacts CS','CS completes enquiry handling','Life direct product promoted','Lead transferred to TM','TM follow-up call','Conversion'],logic:'Existing servicing conversations can become warm handoff opportunities into Life sales conversion.'}
+    };
+    function openModal(key){
+      const d=details[key];
+      document.getElementById('modalTitle').textContent=d.title;
+      document.getElementById('modalDesc').textContent=d.desc;
+      document.getElementById('modalLogic').textContent=d.logic;
+
+      if(key==='afterPurchaseBanner'){
+        document.getElementById('modalFlow').innerHTML=`
+          <div class="decision-tree">
+            <div class="decision-node">1. Purchase Complete</div>
+            <div class="decision-arrow">↓</div>
+            <div class="decision-node">2. Cross-sell Banner (Life Offer) Shown</div>
+            <div class="decision-arrow">↓</div>
+            <div class="decision-node">3. Customer Clicks</div>
+            <div class="decision-arrow">↙ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↘</div>
+
+            <div class="decision-branches">
+              <div class="branch">
+                <div class="branch-label">Route 1</div>
+                <div class="decision-node">Purchase</div>
+              </div>
+
+              <div class="branch">
+                <div class="branch-label">Route 2</div>
+                <div class="decision-node">Click but No Purchase</div>
+                <div class="branch-arrow">↓</div>
+                <div class="decision-node">Drop-off Lead</div>
+                <div class="branch-arrow">↓</div>
+                <div class="decision-node">TM Follow-up Call</div>
+              </div>
+            </div>
+          </div>`;
+      } else {
+        document.getElementById('modalFlow').innerHTML=d.steps.map((s,i)=>`<span class="step" data-step="${i+1}">${s}</span>`).join('');
+      }
+
+      document.getElementById('modal').classList.add('show')
+    }
+    function hideModal(){document.getElementById('modal').classList.remove('show')}
+
+    function filterJourney(type, el){
+      document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.remove('active'));
+      el.classList.add('active');
+
+      const giCols=document.querySelectorAll('.gi-column');
+      const lifeCols=document.querySelectorAll('.life-column');
+      const sharedZones=document.querySelectorAll('.shared-zone');
+
+      if(type==='all'){
+        giCols.forEach(col=>col.style.display='block');
+        lifeCols.forEach(col=>col.style.display='block');
+        sharedZones.forEach(zone=>zone.style.display='block');
+      } else if(type==='gi'){
+        giCols.forEach(col=>col.style.display='block');
+        lifeCols.forEach(col=>col.style.display='none');
+        sharedZones.forEach(zone=>zone.style.display='block');
+      } else if(type==='life'){
+        giCols.forEach(col=>col.style.display='none');
+        lifeCols.forEach(col=>col.style.display='block');
+        sharedZones.forEach(zone=>zone.style.display='block');
+      }
+    }
+
+    function openUniverseModal(){document.getElementById('universeModal').classList.add('show')}
+    function hideUniverseModal(){document.getElementById('universeModal').classList.remove('show')}
+    function closeUniverseModal(e){if(e.target.id==='universeModal')hideUniverseModal()}
+
+    function openRoadmapModal(){document.getElementById('roadmapModal').classList.add('show')}
+    function hideRoadmapModal(){document.getElementById('roadmapModal').classList.remove('show')}
+    function closeRoadmapModal(e){if(e.target.id==='roadmapModal')hideRoadmapModal()}
+
+    function closeModal(e){if(e.target.id==='modal')hideModal()}document.addEventListener('keydown',e=>{if(e.key==='Escape')hideModal()});
+  </script>
+  <div id="universeModal" class="modal universe-modal" onclick="closeUniverseModal(event)">
+    <div class="modal-card universe-modal-card" onclick="event.stopPropagation()">
+      <div class="modal-head">
+        <div><h2>Reachable Universe</h2><p>Reachability across customer segments and CRM channels.</p></div>
+        <button class="close" onclick="hideUniverseModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <table class="universe-table">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <tr>
+            <th>Customer Segment</th>
+            <th>Purchase Journey<br/>Cross-sell</th>
+            <th>eDM</th>
+            <th>OZCP Pop-up</th>
+            <th>OZCP Banner</th>
+            <th>Life TM Call</th>
+          </tr>
+          <tr>
+            <td>GI Direct</td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+          </tr>
+          <tr>
+            <td>GI Affinity</td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+          </tr>
+          <tr>
+            <td>GI FI</td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+          </tr>
+          <tr>
+            <td>GI Travel Agency</td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+          </tr>
+          <tr>
+            <td>Life Direct</td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+          </tr>
+          <tr>
+            <td>GI + Life LBA / IFA / IHA</td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+            <td><span class="status-circle" style="background:#ef4444"></span></td>
+          </tr>
+          <tr>
+            <td>Life Orphans</td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+            <td><span class="status-circle" style="background:#22c55e"></span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="roadmapModal" class="modal" onclick="closeRoadmapModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-head">
+        <div><h2>So what's next?</h2><p>Upcoming CRM cross-sell development roadmap.</p></div>
+        <button class="close" onclick="hideRoadmapModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="roadmap-phase">
+          <h3>Phase 1: Jun – Jul</h3>
+          <p><b>(Easy Start)</b> Include GI cross-sell in all GI ↔ Life lead moments.</p>
+        </div>
+        <div class="roadmap-phase">
+          <h3>Phase 2: Aug – Sep</h3>
+          <p>Complete the cross-sell initiatives in retention and lapse stages.</p>
+        </div>
+        <div class="roadmap-phase">
+          <h3>Phase 3: Oct 2026 – Mar 2027</h3>
+          <p>Explore more personalized “Just in Time” situational selling opportunities.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
