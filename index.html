@@ -68,6 +68,36 @@
     .roadmap-phase{border:1px solid #e5e7eb;border-radius:18px;padding:16px;margin-bottom:12px;background:#f9fafb}
     .roadmap-phase h3{margin:0 0 8px;color:#10233f}
     .roadmap-phase p{margin:0;color:var(--muted);line-height:1.5;font-size:14px}
+
+.universe-tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.universe-tab{
+  border:1px solid #d9e2ef;
+  background:#fff;
+  padding:10px 16px;
+  border-radius:12px;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.universe-tab.active{
+  background:#003399;
+  color:#fff;
+  border-color:#003399;
+}
+
+.universe-phase{
+  display:none;
+}
+
+.universe-phase.active{
+  display:block;
+}
     @media(max-width:1400px){.stage-grid{grid-template-columns:repeat(5,minmax(360px,360px))}.lead-engine,.message-box,.flow{grid-template-columns:1fr}.flow-step:not(:last-child)::after{display:none}}@media(max-width:850px){.stage-grid,.two-col,.touchpoint-list{grid-template-columns:1fr}}
   </style>
 </head>
@@ -397,7 +427,19 @@
         sharedZones.forEach(zone=>zone.style.display='block');
       }
     }
+function showUniversePhase(id,btn){
 
+  document.querySelectorAll('.universe-phase')
+    .forEach(p=>p.classList.remove('active'));
+
+  document.querySelectorAll('.universe-tab')
+    .forEach(t=>t.classList.remove('active'));
+
+  document.getElementById(id)
+    .classList.add('active');
+
+  btn.classList.add('active');
+}
     function openUniverseModal(){document.getElementById('universeModal').classList.add('show')}
     function hideUniverseModal(){document.getElementById('universeModal').classList.remove('show')}
     function closeUniverseModal(e){if(e.target.id==='universeModal')hideUniverseModal()}
@@ -414,7 +456,26 @@
         <div><h2>Reachable Universe</h2><p>Reachability across customer segments and CRM channels.</p></div>
         <button class="close" onclick="hideUniverseModal()">×</button>
       </div>
-      <div class="modal-body">
+<div class="modal-body">
+
+  <div class="universe-tabs">
+    <button class="universe-tab active"
+      onclick="showUniversePhase('phase1',this)">
+      Phase 1: Direct
+    </button>
+
+    <button class="universe-tab"
+      onclick="showUniversePhase('phase2',this)">
+      Phase 2: Partnership & Affinity
+    </button>
+
+    <button class="universe-tab"
+      onclick="showUniversePhase('phase3',this)">
+      Phase 3: Brokers & Agents
+    </button>
+  </div>
+
+  <div id="phase1" class="universe-phase active">
         <table class="universe-table">
           <colgroup>
             <col />
@@ -489,6 +550,166 @@
             <td><span class="status-circle" style="background:#22c55e"></span></td>
           </tr>
         </table>
+</div>
+<div id="phase2" class="universe-phase">
+
+<table class="universe-table">
+<tr>
+  <th>Customer Segment</th>
+  <th>Purchase Journey<br>Cross-sell</th>
+  <th>eDM</th>
+  <th>OZCP Pop-up</th>
+  <th>OZCP Banner</th>
+  <th>Life TM Call</th>
+</tr>
+
+<tr>
+  <td>GI Direct</td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+</tr>
+
+<tr>
+  <td>GI Affinity</td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+</tr>
+
+<tr>
+  <td>GI FI</td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+</tr>
+
+<tr>
+  <td>GI Travel Agency</td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+</tr>
+
+<tr>
+  <td>Life Direct</td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+</tr>
+
+<tr>
+  <td>GI + Life LBA / IFA / IHA</td>
+  <td><span class="status-circle" style="background:#ef4444"></span></td>
+  <td><span class="status-circle" style="background:#ef4444"></span></td>
+  <td><span class="status-circle" style="background:#ef4444"></span></td>
+  <td><span class="status-circle" style="background:#ef4444"></span></td>
+  <td><span class="status-circle" style="background:#ef4444"></span></td>
+</tr>
+
+<tr>
+  <td>Life Orphans</td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+</tr>
+
+</table>
+
+</div>
+</div>
+
+<div id="phase3" class="universe-phase">
+
+<table class="universe-table">
+<tr>
+  <th>Customer Segment</th>
+  <th>Purchase Journey<br>Cross-sell</th>
+  <th>eDM</th>
+  <th>OZCP Pop-up</th>
+  <th>OZCP Banner</th>
+  <th>Life TM Call</th>
+</tr>
+
+<tr>
+  <td>GI Direct</td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+</tr>
+
+<tr>
+  <td>GI Affinity</td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+</tr>
+
+<tr>
+  <td>GI FI</td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+</tr>
+
+<tr>
+  <td>GI Travel Agency</td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+</tr>
+
+<tr>
+  <td>Life Direct</td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+</tr>
+
+<tr>
+  <td>GI + Life LBA / IFA / IHA</td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#ef4444"></span></td>
+</tr>
+
+<tr>
+  <td>Life Orphans</td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+  <td><span class="status-circle" style="background:#22c55e"></span></td>
+</tr>
+
+</table>
+
+</div>
+</div>
       </div>
     </div>
   </div>
