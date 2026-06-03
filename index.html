@@ -240,27 +240,56 @@
     </section>
     </div>
 
-    <section class="lead-engine">
-      <div class="panel">
-        <h2>GI ↔ Life Cross-sell Conversion Engine</h2>
-        <p>The strategic layer: GI and Life journeys support each other. Customer interactions in either journey can become signals for the next best GI or Life offer.</p>
-        <div class="flow">
-          <div class="flow-step"><span class="flow-icon">📧</span><b>CRM Touchpoint</b><span class="note">eDM, banner, thank-you page, OZCP</span></div>
-          <div class="flow-step"><span class="flow-icon">🔁</span><b>GI / Life Offer</b><span class="note">Relevant next product message</span></div>
-          <div class="flow-step"><span class="flow-icon">👆</span><b>Customer Click</b><span class="note">Interest signal captured</span></div>
-          <div class="flow-step"><span class="flow-icon">🎯</span><b>Lead Created</b><span class="note">Customer + source context</span></div>
-          <div class="flow-step"><span class="flow-icon">📞</span><b>Follow-up</b><span class="note">TM call or digital journey</span></div>
-        </div>
+<section class="lead-engine" style="grid-template-columns:1fr">
+  <div class="panel">
+    <h2>GI ↔ Life Cross-sell Conversion Engine</h2>
+    <p>The operational funnel: CRM touchpoints generate customer interest, convert clicks into leads, nurture them with eDM / WhatsApp and pass warm leads to TM for follow-up conversion.</p>
+
+    <div class="flow" style="grid-template-columns:repeat(7,1fr)">
+      <div class="flow-step">
+        <span class="flow-icon">📍</span>
+        <b>CRM Touchpoints</b>
+        <span class="note">eDM, banner, thank-you page, OZCP</span>
       </div>
 
-      <div class="panel">
-        <h2>Priority Shared Cross-sell Moments</h2>
-        <p>Best touchpoints because customers are active, identifiable and reachable.</p>
-        <div class="touchpoint-list">
-          <div class="mini">★ After purchase page banner</div><div class="mini">★ Fulfilment email</div><div class="mini">★ Welcome back eDM</div><div class="mini">★ After TNPS eDM</div><div class="mini">★ After claim eDM</div><div class="mini">★ OZCP pop-up / banner</div><div class="mini">★ Birthday eDM</div><div class="mini">★ Seasonal eDM</div>
-        </div>
+      <div class="flow-step">
+        <span class="flow-icon">🎯</span>
+        <b>GI / Life Offer</b>
+        <span class="note">Relevant next product message</span>
       </div>
-    </section>
+
+      <div class="flow-step">
+        <span class="flow-icon">👆</span>
+        <b>Customer Click</b>
+        <span class="note">Interest signal captured</span>
+      </div>
+
+      <div class="flow-step">
+        <span class="flow-icon">📝</span>
+        <b>Lead Created</b>
+        <span class="note">Customer + source context</span>
+      </div>
+
+      <div class="flow-step">
+        <span class="flow-icon">💬</span>
+        <b>eDM & WhatsApp Greeting</b>
+        <span class="note">Instant warm follow-up</span>
+      </div>
+
+      <div class="flow-step">
+        <span class="flow-icon">📧</span>
+        <b>Nurturing eDM + Incentive</b>
+        <span class="note">Strengthen purchase intent</span>
+      </div>
+
+      <div class="flow-step">
+        <span class="flow-icon">📞</span>
+        <b>TM Follow-up Call</b>
+        <span class="note">Assisted conversion</span>
+      </div>
+    </div>
+  </div>
+</section>
 
     <section style="margin-top:30px">
       <div style="display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:16px">
@@ -349,7 +378,12 @@
       paidAd:{title:'GI Paid Ad',desc:'Paid media drives high-intent traffic into the GI purchase journey.',steps:['Paid ad','Purchase site','Drop-off reminder'],logic:'If customer drops off, trigger reminder eDM or retargeting. Life offer can be tested after GI purchase intent is captured.'},
       organic:{title:'GI Organic',desc:'SEO articles and product pages create education-led purchase intent.',steps:['Organic','Product page / SEO article','Pop-up offer / sticky banner','Purchase site','Drop-off reminder'],logic:'Use pop-up or sticky banner to guide customer to GI purchase. Include Life teaser for protection-related content.'},
       leadGen:{title:'GI Lead Gen',desc:'Free product campaign captures customer data and creates a nurturing path.',steps:['Lead gen campaign','Free product registration','Lead','Nurturing eDM','Purchase site','Drop-off reminder'],logic:'Use nurturing eDM to cross-sell GI and introduce Life protection. Clicks on Life message become TM leads.'},
-      afterPurchaseBanner:{title:'After Purchase Page Banner',desc:'Use the thank-you page as an immediate next-best-offer moment.',steps:['Purchase complete','Cross-sell Banner (Life offer) shown','Customer clicks','Route 1: Purchase','Route 2: Click but no purchase','Drop-off lead','TM follow-up call'],logic:'Life offer clicks become valuable intent signals. Customers who click but do not purchase can be captured as warm leads for TM follow-up conversion.'},
+afterPurchaseBanner:{
+  title:'After Purchase Page Banner',
+  desc:'Use the thank-you page as a GI × Life cross-sell moment.',
+  steps:[],
+  logic:'Customers who click but do not purchase become warm leads. They can be nurtured through eDM, WhatsApp greeting, incentive messaging and TM follow-up.'
+},
       welcomeBack:{title:'Welcome Back eDM',desc:'Re-engage customers after product usage or service moment.',steps:['Customer returns / journey completed','Welcome back eDM','GI / Life offer','Customer clicks','Follow-up eDM or TM lead'],logic:'Good moment to move from transaction to relationship. Life angle can focus on family or income protection.'},
       ozcp:{title:'OZCP Pop-up / Banner',desc:'Portal login provides a personalised next-best-offer placement.',steps:['OZCP login','Pop-up / banner','Customer clicks','Product page','Click but no purchase','Follow-up eDM'],logic:'Use customer profile and policy holding to decide whether to show GI, Life or multi-policy offer.'},
       lifePaidAd:{title:'Life Paid Ad',desc:'Life paid campaigns can convert digitally or move customers into TM-assisted conversion.',steps:['Paid ad','Product page','Direct digital conversion OR drop-off','Drop-off reminder / retargeting','TM follow-up calls','Conversion'],logic:'Customers who show interest but do not complete digitally are valuable warm leads for TM conversion support.'},
@@ -359,7 +393,12 @@
       lifeTmCallAfter:{title:'Life TM Call',desc:'TM engagement after purchase can create additional saving and investment opportunities.',steps:['TM call','Cross-sell / referral to corp agents','Saving / investment consultation','Conversion'],logic:'Post-purchase TM engagement can deepen customer relationship and expand product holding through corp agent referral.'},
       freeToPaid:{title:'Free to Paid Upsell',desc:'Upsell free-product users into paid Life products through nurturing.',steps:['Free product registration','eDM nurturing','Upsell to paid product','TM follow-up','Conversion'],logic:'Customers already engaged with free products are lower-friction prospects for paid Life conversion.'},
       lifeTmCall:{title:'Life TM Call',desc:'TM interaction can identify broader customer protection and investment needs.',steps:['TM call','Needs discovery','Referral to corp agent','Saving / investment consultation','Conversion'],logic:'TM conversations can generate referrals into higher-value saving and investment solutions handled by corp agents.'},
-      lifeAfterPurchaseBanner:{title:'Life After Purchase Page Banner',desc:'Thank-you page banner drives additional Life direct product opportunities.',steps:['Purchase completed','Banner displayed','Direct conversion OR drop-off','Drop-off reminder / retargeting','TM follow-up call','Conversion'],logic:'Customers who do not convert immediately can be retargeted and followed up by TM for assisted conversion.'},
+      lifeAfterPurchaseBanner:{
+  title:'Life After Purchase Page Banner',
+  desc:'Use the thank-you page as a GI × Life cross-sell moment.',
+  steps:['Purchase complete','Cross-sell banner (Life + GI) offer','Customer click','Route 1: Purchase','Route 2: Click but no purchase','Drop-off lead','eDM & WhatsApp greeting','Nurturing eDM + incentive','TM Call'],
+  logic:'Customers who click but do not purchase become warm leads. They can be nurtured through eDM, WhatsApp greeting, incentive messaging and TM follow-up.'
+},
       lifeOzcpBanner:{title:'Life OZCP Marketing Banner',desc:'Portal-based Life marketing placements support direct and TM-assisted conversion.',steps:['OZCP login','Marketing banner shown','Direct conversion OR drop-off','Drop-off reminder / retargeting','TM follow-up call','Conversion'],logic:'OZCP creates persistent remarketing opportunities using customer profile and policy data.'},
       lifePolicyLetter:{title:'Customer Policy Update Letter',desc:'Monthly ZAL + ZLIC policy updates become Life direct sales opportunities.',steps:['Monthly policy update letter','Introduction to Life direct products','Direct conversion OR drop-off','Drop-off reminder / retargeting','TM follow-up call','Conversion'],logic:'Monthly customer communication can become a scalable direct sales and lead generation touchpoint.'},
       maturityEdm:{title:'Maturity-triggered eDM',desc:'Lifecycle maturity communications create re-engagement opportunities.',steps:['Policy maturity reached','Maturity-triggered eDM','Direct product promotion','Customer click','TM follow-up call','Conversion'],logic:'Maturity moments create strong intent signals for new Life product conversations.'},
@@ -371,12 +410,12 @@
       document.getElementById('modalDesc').textContent=d.desc;
       document.getElementById('modalLogic').textContent=d.logic;
 
-      if(key==='afterPurchaseBanner'){
+if(key==='afterPurchaseBanner' || key==='lifeAfterPurchaseBanner'){
         document.getElementById('modalFlow').innerHTML=`
           <div class="decision-tree">
             <div class="decision-node">1. Purchase Complete</div>
             <div class="decision-arrow">↓</div>
-            <div class="decision-node">2. Cross-sell Banner (Life Offer) Shown</div>
+            <div class="decision-node">2. Cross-sell Banner (Life + GI Offer) Shown</div>
             <div class="decision-arrow">↓</div>
             <div class="decision-node">3. Customer Clicks</div>
             <div class="decision-arrow">↙ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↘</div>
@@ -389,11 +428,15 @@
 
               <div class="branch">
                 <div class="branch-label">Route 2</div>
-                <div class="decision-node">Click but No Purchase</div>
-                <div class="branch-arrow">↓</div>
-                <div class="decision-node">Drop-off Lead</div>
-                <div class="branch-arrow">↓</div>
-                <div class="decision-node">TM Follow-up Call</div>
+              <div class="decision-node">Click but No Purchase</div>
+<div class="branch-arrow">↓</div>
+<div class="decision-node">Drop-off Lead</div>
+<div class="branch-arrow">↓</div>
+<div class="decision-node">eDM & WhatsApp Greeting</div>
+<div class="branch-arrow">↓</div>
+<div class="decision-node">Nurturing eDM + Incentive</div>
+<div class="branch-arrow">↓</div>
+<div class="decision-node">TM Call</div>
               </div>
             </div>
           </div>`;
