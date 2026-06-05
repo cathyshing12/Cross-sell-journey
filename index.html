@@ -49,7 +49,7 @@
 
     .modal{display:none;position:fixed;inset:0;z-index:20;background:rgba(15,23,42,.58);align-items:center;justify-content:center;padding:24px}.modal.show{display:flex}.modal-card{width:min(760px,96vw);background:#fff;border-radius:26px;box-shadow:0 30px 80px rgba(0,0,0,.25);overflow:hidden}
     .universe-modal{padding:18px}
-    .universe-modal-card{width:98vw;max-width:1500px;max-height:92vh;overflow:auto}
+    .universe-modal-card{width:99vw;max-width:1700px;max-height:92vh;overflow:auto}
     .universe-modal-card .modal-body{overflow-x:auto;padding:24px 28px}.modal-head{padding:20px 24px;background:linear-gradient(135deg,#003399,#1d4ed8);color:white;display:flex;justify-content:space-between;gap:16px;align-items:start}.modal-head h2{margin:0;font-size:22px}.modal-head p{margin:6px 0 0;color:#dbeafe;font-size:13px;line-height:1.4}.close{border:0;background:rgba(255,255,255,.18);color:#fff;border-radius:999px;width:34px;height:34px;font-size:20px;cursor:pointer}.modal-body{padding:22px 24px}.detail-flow{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:16px;position:relative}.step{background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:13px 14px 13px 46px;font-size:13px;font-weight:800;color:#263244;position:relative;box-shadow:0 5px 12px rgba(15,23,42,.04)}.step::before{content:attr(data-step);position:absolute;left:13px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--zurich-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900}.step:not(:last-child)::after{content:'↓';position:absolute;left:22px;bottom:-18px;color:var(--zurich-blue);font-weight:900;z-index:2}.modal-section{background:#f9fafb;border:1px solid #e5e7eb;border-radius:18px;padding:14px;margin-top:12px}
     .decision-tree{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:16px}
     .decision-arrow{font-size:22px;font-weight:900;color:var(--zurich-blue);line-height:1}
@@ -58,10 +58,25 @@
     .decision-branches{display:flex;gap:18px;justify-content:center;align-items:flex-start;width:100%}
     .branch{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1}
     .branch-label{font-size:12px;font-weight:900;color:var(--zurich-blue);text-transform:uppercase;letter-spacing:.04em}.modal-section b{display:block;color:#10233f;margin-bottom:6px}.modal-section span{color:var(--muted);font-size:13px;line-height:1.45}
-    .universe-table{width:100%;min-width:980px;border-collapse:collapse;font-size:13px;margin-top:8px;table-layout:fixed}
-    .universe-table col:first-child{width:230px}
-    .universe-table col:not(:first-child){width:120px}
-    .universe-table th,.universe-table td{border:1px solid #e5e7eb;padding:12px 10px;text-align:center;height:58px;vertical-align:middle;white-space:nowrap}
+    .universe-table{
+  width:100%;
+  min-width:1150px;
+  border-collapse:collapse;
+  font-size:11px;
+  margin-top:8px;
+  table-layout:fixed;
+}
+
+.universe-table th,
+.universe-table td{
+  border:1px solid #e5e7eb;
+  padding:6px 6px;
+  text-align:center;
+  height:36px;
+  vertical-align:middle;
+  white-space:normal;
+  line-height:1.25;
+}
     .universe-table th{background:#10233f;color:#fff;font-weight:800}
     .universe-table td:first-child{font-weight:800;text-align:left;background:#f8fafc}
     .status-circle{display:inline-block;width:12px;height:12px;border-radius:50%}
@@ -245,7 +260,7 @@
     <h2>GI ↔ Life Cross-sell Conversion Engine</h2>
     <p>The operational funnel: CRM touchpoints generate customer interest, convert clicks into leads, nurture them with eDM / WhatsApp and pass warm leads to TM for follow-up conversion.</p>
 
-    <div class="flow" style="grid-template-columns:repeat(7,1fr)">
+    <div class="flow" style="grid-template-columns:repeat(8,1fr)">
       <div class="flow-step">
         <span class="flow-icon">📍</span>
         <b>CRM Touchpoints</b>
@@ -287,6 +302,11 @@
         <b>TM Follow-up Call</b>
         <span class="note">Assisted conversion</span>
       </div>
+<div class="flow-step">
+  <span class="flow-icon">✅</span>
+  <b>Policy Purchase</b>
+  <span class="note">Cross-sell conversion achieved</span>
+</div>
     </div>
   </div>
 </section>
@@ -501,6 +521,75 @@ function showUniversePhase(id,btn){
       </div>
 <div class="modal-body">
 
+<div style="
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:18px;
+">
+
+  <div style="
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    border-radius:16px;
+    padding:16px;
+    text-align:center;
+  ">
+    <div style="font-size:12px;color:#2563eb;font-weight:800">
+      Current Reachable Universe
+    </div>
+
+    <div style="font-size:30px;font-weight:900;color:#10233f;margin-top:6px">
+      260k
+    </div>
+
+    <div style="font-size:12px;color:#64748b">
+      Connected customers
+    </div>
+  </div>
+
+  <div style="
+    background:#f5f3ff;
+    border:1px solid #ddd6fe;
+    border-radius:16px;
+    padding:16px;
+    text-align:center;
+  ">
+    <div style="font-size:12px;color:#7c3aed;font-weight:800">
+      Phase 2 Potential
+    </div>
+
+    <div style="font-size:30px;font-weight:900;color:#10233f;margin-top:6px">
+      390k
+    </div>
+
+    <div style="font-size:12px;color:#16a34a">
+      +130k Customers
+    </div>
+  </div>
+
+  <div style="
+    background:#f0fdf4;
+    border:1px solid #bbf7d0;
+    border-radius:16px;
+    padding:16px;
+    text-align:center;
+  ">
+    <div style="font-size:12px;color:#16a34a;font-weight:800">
+      Phase 3 Potential
+    </div>
+
+    <div style="font-size:30px;font-weight:900;color:#10233f;margin-top:6px">
+      620k
+    </div>
+
+    <div style="font-size:12px;color:#16a34a">
+      +360k Customers
+    </div>
+  </div>
+
+</div>
+
   <div class="universe-tabs">
     <button class="universe-tab active"
       onclick="showUniversePhase('phase1',this)">
@@ -509,307 +598,93 @@ function showUniversePhase(id,btn){
 
     <button class="universe-tab"
       onclick="showUniversePhase('phase2',this)">
-      Phase 2: Partnership & Affinity
+      Phase 2: Expand to Partnerships
     </button>
 
     <button class="universe-tab"
       onclick="showUniversePhase('phase3',this)">
-      Phase 3: Brokers & Agents
+      Phase 3: Expand to Brokers & Agents
     </button>
   </div>
 
-  <div id="phase1" class="universe-phase active">
-        <table class="universe-table">
-          <colgroup>
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-          </colgroup>
-          <tr>
-            <th>Customer Segment</th>
-            <th>Purchase Journey<br/>Cross-sell</th>
-            <th>eDM</th>
-            <th>OZCP Pop-up</th>
-            <th>OZCP Banner</th>
-            <th>Life TM Call</th>
-          </tr>
-          <tr>
-            <td>GI Direct</td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-          </tr>
-          <tr>
-            <td>GI Partnership</td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-          </tr>
-          <tr>
-            <td>GI FI</td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-          </tr>
-          <tr>
-            <td>GI Travel Agency</td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-          </tr>
-          <tr>
-            <td>Life Direct</td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-          </tr>
+<div id="phase1" class="universe-phase active">
+  <table class="universe-table">
+    <colgroup>
+      <col style="width:170px"><col style="width:85px"><col style="width:85px">
+      <col style="width:90px"><col style="width:70px"><col style="width:90px">
+      <col style="width:90px"><col style="width:85px"><col style="width:260px">
+    </colgroup>
+    <tr>
+      <th>Customer Segment</th><th>Connected<br>Customers</th><th>Opt-in<br>Customers</th>
+      <th>Purchase Journey<br>Cross-sell</th><th>eDM</th><th>OZCP<br>(Passive)</th>
+      <th>OZCP<br>(Proactive)</th><th>Life TM Call</th><th>Remarks</th>
+    </tr>
 
-<tr>
-  <td>Life Partnership</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-</tr>
-
-
-          <tr>
-            <td>GI + Life LBA / IFA / IHA</td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-            <td><span class="status-circle" style="background:#ef4444"></span></td>
-          </tr>
-          <tr>
-            <td>Life Orphans</td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-            <td><span class="status-circle" style="background:#22c55e"></span></td>
-          </tr>
-        </table>
+    <tr><td>GI Direct</td><td>270k</td><td>150k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td></td></tr>
+    <tr><td>GI Partnership</td><td>120k</td><td>85k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td></td></tr>
+    <tr><td>GI FI</td><td>110k</td><td>18k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td></td></tr>
+    <tr><td>GI Travel Agency</td><td>120k</td><td>25k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td></td></tr>
+    <tr><td>GI IA</td><td>220k</td><td>80k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td></td></tr>
+    <tr><td>GI LBA</td><td>370k</td><td>160k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td></td></tr>
+    <tr><td>Life Direct</td><td>1k</td><td>0.6k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td></td></tr>
+    <tr><td>Life Partnership</td><td>8k</td><td>5k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td></td></tr>
+    <tr><td>Life IFA / IHA</td><td>56k</td><td>10k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td></td></tr>
+    <tr><td>Life Orphan</td><td>77k</td><td>14k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td></td></tr>
+  </table>
 </div>
+
 <div id="phase2" class="universe-phase">
+  <table class="universe-table">
+    <colgroup>
+      <col style="width:170px"><col style="width:85px"><col style="width:85px">
+      <col style="width:90px"><col style="width:70px"><col style="width:90px">
+      <col style="width:90px"><col style="width:85px"><col style="width:260px">
+    </colgroup>
+    <tr>
+      <th>Customer Segment</th><th>Connected<br>Customers</th><th>Opt-in<br>Customers</th>
+      <th>Purchase Journey<br>Cross-sell</th><th>eDM</th><th>OZCP<br>(Passive)</th>
+      <th>OZCP<br>(Proactive)</th><th>Life TM Call</th><th>Remarks</th>
+    </tr>
 
-<table class="universe-table">
-<colgroup>
-  <col />
-  <col />
-  <col />
-  <col />
-  <col />
-  <col />
-</colgroup>
-<tr>
-  <th>Customer Segment</th>
-  <th>Purchase Journey<br>Cross-sell</th>
-  <th>eDM</th>
-  <th>OZCP Pop-up</th>
-  <th>OZCP Banner</th>
-  <th>Life TM Call</th>
-</tr>
-
-<tr>
-  <td>GI Direct</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-</tr>
-
-<tr>
-  <td>GI Partnership</td>
-
-  <td>
-    <span class="status-circle" style="background:#22c55e"></span>
-  </td>
-
-  <td colspan="4"
-      style="
-        text-align:left;
-        white-space:normal;
-        line-height:1.4;
-        font-size:12px;
-        padding:12px;
-        background:#fff7d6;
-        border-left:4px solid #f5b700;
-      ">
-    <strong>Partial:</strong>
-    Subject to discussion with key active partners.
-    Incentive / commission to partners for successful cross-sell is required.
-  </td>
-</tr>
-
-<tr>
-  <td>GI FI</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-</tr>
-
-<tr>
-  <td>GI Travel Agency</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-</tr>
-
-<tr>
-  <td>Life Direct</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-</tr>
-
-<tr>
-  <td>Life Partnership</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-</tr>
-
-
-<tr>
-  <td>GI + Life LBA / IFA / IHA</td>
-  <td><span class="status-circle" style="background:#ef4444"></span></td>
-  <td><span class="status-circle" style="background:#ef4444"></span></td>
-  <td><span class="status-circle" style="background:#ef4444"></span></td>
-  <td><span class="status-circle" style="background:#ef4444"></span></td>
-  <td><span class="status-circle" style="background:#ef4444"></span></td>
-</tr>
-
-<tr>
-  <td>Life Orphans</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-</tr>
-
-</table>
-
+    <tr><td>GI Direct</td><td>270k</td><td>150k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td></td></tr>
+    <tr><td>GI Partnership</td><td>120k</td><td>85k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td style="text-align:left;white-space:normal;background:#fff7d6"><strong>Partial:</strong><br>
+✅ Subject to discussion with key partners<br>
+✅ Commission required</td></tr>
+    <tr><td>GI FI</td><td>110k</td><td>18k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td style="text-align:left;white-space:normal;background:#fff7d6"><strong>Partial:</strong><br> ✅ Subject to discussion with key partners.<br> ✅ Commission required. ✅ Bank to execute.</td></tr>
+    <tr><td>GI Travel Agency</td><td>120k</td><td>25k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td style="text-align:left;white-space:normal;background:#fff7d6"><strong>Partial:</strong><br> ✅ Subject to discussion with key partners.<br> ✅ Commission required.</td></tr>
+    <tr><td>GI IA</td><td>220k</td><td>80k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td></td></tr>
+    <tr><td>GI LBA</td><td>370k</td><td>160k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td></td></tr>
+    <tr><td>Life Direct</td><td>1k</td><td>0.6k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td></td></tr>
+    <tr><td>Life Partnership</td><td>8k</td><td>5k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td></td></tr>
+    <tr><td>Life IFA / IHA</td><td>56k</td><td>10k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td></td></tr>
+    <tr><td>Life Orphan</td><td>77k</td><td>14k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td></td></tr>
+  </table>
 </div>
 
 <div id="phase3" class="universe-phase">
+  <table class="universe-table">
+    <colgroup>
+      <col style="width:170px"><col style="width:85px"><col style="width:85px">
+      <col style="width:90px"><col style="width:70px"><col style="width:90px">
+      <col style="width:90px"><col style="width:85px"><col style="width:260px">
+    </colgroup>
+    <tr>
+      <th>Customer Segment</th><th>Connected<br>Customers</th><th>Opt-in<br>Customers</th>
+      <th>Purchase Journey<br>Cross-sell</th><th>eDM</th><th>OZCP<br>(Passive)</th>
+      <th>OZCP<br>(Proactive)</th><th>Life TM Call</th><th>Remarks</th>
+    </tr>
 
-<table class="universe-table">
-<colgroup>
-  <col />
-  <col />
-  <col />
-  <col />
-  <col />
-  <col />
-</colgroup>
-<tr>
-  <th>Customer Segment</th>
-  <th>Purchase Journey<br>Cross-sell</th>
-  <th>eDM</th>
-  <th>OZCP Pop-up</th>
-  <th>OZCP Banner</th>
-  <th>Life TM Call</th>
-</tr>
-
-<tr>
-  <td>GI Direct</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-</tr>
-
-<tr>
-  <td>GI Partnership</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-</tr>
-
-<tr>
-  <td>GI FI</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-</tr>
-
-<tr>
-  <td>GI Travel Agency</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-</tr>
-
-<tr>
-  <td>Life Direct</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-</tr>
-
-<tr>
-  <td>Life Partnership</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-</tr>
-
-<tr>
-  <td>GI + Life LBA / IFA / IHA</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#ef4444"></span></td>
-</tr>
-
-<tr>
-  <td>Life Orphans</td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-  <td><span class="status-circle" style="background:#22c55e"></span></td>
-</tr>
-
-</table>
-
+    <tr><td>GI Direct</td><td>270k</td><td>150k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td></td></tr>
+    <tr><td>GI Partnership</td><td>120k</td><td>85k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td></td></tr>
+    <tr><td>GI FI</td><td>110k</td><td>18k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td></td></tr>
+    <tr><td>GI Travel Agency</td><td>120k</td><td>25k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td></td></tr>
+    <tr><td>GI IA</td><td>220k</td><td>80k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td style="text-align:left;white-space:normal;background:#fff7d6"><strong>Partial:</strong><br> ✅ Subject to discussion with key agents.<br> ✅ Commission required.</td></tr>
+    <tr><td>GI LBA</td><td>370k</td><td>160k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td style="text-align:left;white-space:normal;background:#fff7d6"><strong>Partial:</strong><br> ✅ Subject to discussion with key brokers and agents.<br> ✅ Commission required.</td></tr>
+    <tr><td>Life Direct</td><td>1k</td><td>0.6k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td></td></tr>
+    <tr><td>Life Partnership</td><td>8k</td><td>5k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td></td></tr>
+    <tr><td>Life IFA / IHA</td><td>56k</td><td>10k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#f5b700"></span></td><td><span class="status-circle" style="background:#ef4444"></span></td><td style="text-align:left;white-space:normal;background:#fff7d6"><strong>Partial:</strong><br> ✅ Subject to discussion with key brokers and agents.<br> ✅ Commission required.</td></tr>
+    <tr><td>Life Orphan</td><td>77k</td><td>14k</td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td><span class="status-circle" style="background:#22c55e"></span></td><td></td></tr>
+  </table>
 </div>
       </div>
     </div>
